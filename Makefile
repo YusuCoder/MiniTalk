@@ -3,25 +3,37 @@ GREEN=\033[0;32m
 YELLOW=\033[0;33m
 NC=\033[0m
 
-NAME = libftprintf.a
-
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = 
+SERVER = server
+CLIENT = client
 
-OBJ = $(SRC:.c=.o)
+S_SRCS = server.c
+S_OBJ = $(S_SRCS:.c=.o)
 
-AR = ar rcs
-INCS = ft_printf.h
+C_SRCS = clinet.c
+C_OBJ = $(C_SRCS:.c=.o)
+
+PRINTF = ./printf/printf.a
+PATH_PRINTF = ./printf
+
+INCS = ./printf/ft_printf.h
 RM = rm -f
 
-all: $(NAME)
-	@echo "$(GREEN)$(NAME) \n\n<---------------------------BUILT SUCCESSFULLY!--------------------------->\n"
+all: $(SERVER) $(CLIENT)
+	@echo "$(GREEN)$(SERVER) $(CLIENT) \n\n<---------------------------BUILT SUCCESSFULLY!--------------------------->\n"
 
-$(NAME): $(OBJ)
+$(SERVER): $(S_OBJ)
 	@echo "$(GREEN)\n<---------------------------BUILDING MANDATORY OBJECTS--------------------------->\n"
-	$(AR) $(NAME) $(OBJ)
+	$(CC) $(CFLAGS) -o $(SERVER) $(S_OBJ)
+
+$(CLIENT): $(C_OBJ)
+	@echo "$(GREEN)\n<---------------------------BUILDING MANDATORY OBJECTS--------------------------->\n"
+	$(CC) $(CFLAGS) -o $(CLIENT) $(C_OBJ)
+
+$(PRINTF):
+	@make -C $(PATH_PRINTF)
 
 %.o: %.c $(INCS)
 	@echo "$(YELLOW)\n<---------------------------Compiling--------------------------->"
@@ -29,13 +41,12 @@ $(NAME): $(OBJ)
 
 clean:
 	@echo "$(RED) \nCleaning ........................................................................................\n"
-	$(RM) $(OBJ)
+	$(RM) $(S_OBJ) $(C_OBJ) $(SERVER) $(CLIENT)
 
 fclean: clean
-	$(RM) $(NAME)
-	@echo "$(GREEN)\n<---------------------------All the object files was successfully deleted!--------------------------->\n"
+	@echo "$(GREEN)\n<---------------------------All the object files and executables were successfully deleted!--------------------------->\n"
 
 re: fclean all
-	@echo "$(GREEN)<---------------------------All the object files was deleted and recompiled successfully!--------------------------->\n"
+	@echo "$(GREEN)<---------------------------All the object files were deleted and recompiled successfully!--------------------------->\n"
 
 .PHONY: all clean fclean re

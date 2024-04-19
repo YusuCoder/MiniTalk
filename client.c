@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 14:30:24 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/04/19 14:09:11 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:17:39 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	ft_atoi(const char *str)
 	return (negative * result);
 }
 
+
 int	pid_validation(char *str)
 {
 	int	i;
@@ -51,6 +52,35 @@ int	pid_validation(char *str)
 	return (0);
 }
 
+void	sig_handler(int pid, unsigned char c)
+{
+	int				i;
+
+	i = 0;
+	while (i < 8)
+	{
+		if (c & (1 << (7 - i)))
+		{
+			if (kill(pid, SIGUSR1) == -1)
+			{
+				printf(COLOR_RED"Error sending SIGUSR1\n");
+				return ;
+			}
+		}
+		else
+		{
+			if (kill(pid, SIGUSR2) == -1)
+			{
+				printf(COLOR_RED"Error sending SIGUSR2\n");
+				return ;
+			}
+		}
+		i++;
+		usleep(50);
+	}
+}
+
+
 int	main(int argc, char **argv)
 {
 	int	pid;
@@ -62,7 +92,7 @@ int	main(int argc, char **argv)
 		pid = ft_atoi(argv[1]);
 		if (pid < 1 || pid_validation(argv[1]))
 		{
-			printf("Error! Please retype the PID!\n");
+			printf(COLOR_RED "Error! Please retype the PID!\n");
 			return (1);
 		}
 		while (argv[2][i])
@@ -70,6 +100,11 @@ int	main(int argc, char **argv)
 			sig_handler(pid, argv[2][i]);
 			i++;
 		}
+	}
+	else
+	{
+		printf(COLOR_YELLOW"Manual to use: %s <PID> <message>\n", argv[0]);
+		return (1);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 18:43:51 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/04/19 14:07:01 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:05:14 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	sighandler(int signal)
 	counter++;
 	if (counter == 8)
 	{
-		ft_printf("%c", c);
+		ft_printf(COLOR_MAGENTA ITALIC "%c", c);
 		c = 0;
 		counter = 0;
 	}
@@ -33,7 +33,8 @@ int	main(void)
 {
 	struct sigaction	s_action;
 
-	ft_printf(ANSI_COLOR_BLUE "The server PID is: %d\n", getpid());
+	ft_printf(COLOR_GREEN "The server PID is: ");
+	ft_printf(COLOR_CYAN BOLD UNDERLINE "%d\n" RESET, getpid());
 	s_action.sa_handler = sighandler;
 	s_action.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &s_action, NULL);

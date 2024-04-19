@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 18:43:51 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/04/14 16:13:28 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/04/19 11:59:45 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(void)
 {
 	struct sigaction	s_action;
 
-	ft_printf("The server PID is: %d\n", getpid());
+	ft_printf(ANSI_COLOR_GREEN "The server PID is: %d\n", getpid());
 	s_action.sa_handler = sighandler;
 	s_action.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &s_action, NULL);

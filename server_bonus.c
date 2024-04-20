@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 18:43:51 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/04/19 21:11:24 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/04/20 12:43:30 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ void	sighandler(int signal, siginfo_t *data, void *context)
 	if (counter == 8)
 	{
 		if (c != '\0')
-			ft_printf(COLOR_MAGENTA ITALIC "%c", c);
+			ft_printf(COLOR_MAGENTA ITALIC "%c" RESET, c);
 		else
+		{
 			kill(data->si_pid, SIGUSR1);
+		}
 		c = 0;
 		counter = 0;
 	}

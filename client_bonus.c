@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 14:30:24 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/04/19 22:03:33 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/04/20 13:03:01 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	recieved_message(int signal)
 {
 	if (signal == SIGUSR1)
-		ft_printf(COLOR_GREEN"The characters has been received and printed!\n");
+		ft_printf(COLOR_GREEN"The message has been received for SIGUSR1!\n");
 	else if (signal == SIGUSR2)
-		ft_printf(COLOR_GREEN"The characters has been received and printed!\n");
+		ft_printf(COLOR_GREEN"The message has been received for SIGUSR2\n");
 	else
 		ft_printf("Received unexpected signal: %d\n", signal);
 }
@@ -47,7 +47,7 @@ void	sig_handler(int pid, unsigned char c)
 		{
 			if (kill(pid, SIGUSR1) == -1)
 			{
-				ft_printf(COLOR_RED "Error sending SIGUSR1\n");
+				ft_printf(COLOR_RED "Error sending SIGUSR1\n"RESET);
 				return ;
 			}
 		}
@@ -55,7 +55,7 @@ void	sig_handler(int pid, unsigned char c)
 		{
 			if (kill(pid, SIGUSR2) == -1)
 			{
-				ft_printf(COLOR_RED "Error sending SIGUSR2\n");
+				ft_printf(COLOR_RED "Error sending SIGUSR2\n"RESET);
 				return ;
 			}
 		}
@@ -71,9 +71,9 @@ void	printing_str(void)
 	sa_newsignal.sa_handler = recieved_message;
 	sa_newsignal.sa_flags = SA_SIGINFO;
 	if (sigaction(SIGUSR1, &sa_newsignal, NULL) == -1)
-		ft_printf(COLOR_RED "There is an error! Please try again!");
+		ft_printf(COLOR_RED "There is an error! Please try again!"RESET);
 	if (sigaction(SIGUSR2, &sa_newsignal, NULL) == -1)
-		ft_printf(COLOR_RED "There is an error! Please try again!");
+		ft_printf(COLOR_RED "There is an error! Please try again!"RESET);
 }
 
 int	main(int argc, char **argv)
@@ -88,7 +88,7 @@ int	main(int argc, char **argv)
 		pid = ft_atoi(argv[1]);
 		if (pid < 1 || pid_validation(argv[1]))
 		{
-			ft_printf(COLOR_RED "Error! Please retype the PID!\n");
+			ft_printf(COLOR_RED "Error! Please retype the PID!\n"RESET);
 			return (1);
 		}
 		while (argv[2][i] != '\0')

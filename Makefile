@@ -28,8 +28,8 @@ C_BONUS_OBJS = $(C_BONUS_SRCS:.c=.o)
 
 PRINTF = ./printf/libftprintf.a
 
-all: $(SERVER) $(CLIENT) $(SERVER_BONUS) $(CLIENT_BONUS)
-	@echo "$(GREEN) $(SERVER) $(CLIENT) $(SERVER_BONUS) $(CLIENT_BONUS) \n\n<---------------------------BUILT SUCCESSFULLY!--------------------------->\n"
+all: $(SERVER) $(CLIENT)
+	@echo "$(GREEN) $(SERVER) $(CLIENT)\n\n<---------------------------BUILT SUCCESSFULLY!--------------------------->\n"
 
 bonus: $(SERVER_BONUS) $(CLIENT_BONUS)
 	@echo "$(GREEN) $(SERVER_BONUS) $(CLIENT_BONUS) \n\n<---------------------------BUILT SUCCESSFULLY!--------------------------->\n"
@@ -69,4 +69,4 @@ fclean: clean
 re: fclean all
 	@echo "$(GREEN)<---------------------------All the object files were deleted and recompiled successfully!--------------------------->\n"
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re

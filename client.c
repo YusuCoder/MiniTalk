@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 14:30:24 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/04/19 20:28:39 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/04/20 13:04:12 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	sig_handler(int pid, unsigned char c)
 		{
 			if (kill(pid, SIGUSR1) == -1)
 			{
-				ft_printf(COLOR_RED"Error sending SIGUSR1\n");
+				ft_printf(COLOR_RED"Error sending SIGUSR1\n"RESET);
 				return ;
 			}
 		}
@@ -70,7 +70,7 @@ void	sig_handler(int pid, unsigned char c)
 		{
 			if (kill(pid, SIGUSR2) == -1)
 			{
-				ft_printf(COLOR_RED"Error sending SIGUSR2\n");
+				ft_printf(COLOR_RED"Error sending SIGUSR2\n"RESET);
 				return ;
 			}
 		}
@@ -90,7 +90,7 @@ int	main(int argc, char **argv)
 		pid = ft_atoi(argv[1]);
 		if (pid < 1 || pid_validation(argv[1]))
 		{
-			ft_printf(COLOR_RED "Error! Please retype the PID!\n");
+			ft_printf(COLOR_RED "Error! Please retype the PID!\n"RESET);
 			return (1);
 		}
 		while (argv[2][i])

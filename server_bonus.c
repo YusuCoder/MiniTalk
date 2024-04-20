@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 18:43:51 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/04/20 12:43:30 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/04/20 16:15:08 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,16 @@ int	main(void)
 	ft_printf(COLOR_CYAN BOLD UNDERLINE "%d\n" RESET, getpid());
 	s_action.sa_sigaction = &sighandler;
 	s_action.sa_flags = SA_SIGINFO;
-	sigaction(SIGUSR1, &s_action, NULL);
-	sigaction(SIGUSR2, &s_action, NULL);
+	if (sigaction(SIGUSR1, &s_action, NULL) == -1)
+	{
+		ft_printf(COLOR_RED"Error calling sigaction!\n"RESET);
+		exit (1);
+	}
+	if (sigaction(SIGUSR2, &s_action, NULL) == -1)
+	{
+		ft_printf(COLOR_RED"Error calling sigaction!\n"RESET);
+		exit (1);
+	}
 	while (1)
 	{
 		pause();

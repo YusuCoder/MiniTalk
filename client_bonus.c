@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 14:30:24 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/04/20 13:03:01 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/04/20 14:29:10 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,15 @@ void	printing_str(void)
 	sa_newsignal.sa_handler = recieved_message;
 	sa_newsignal.sa_flags = SA_SIGINFO;
 	if (sigaction(SIGUSR1, &sa_newsignal, NULL) == -1)
-		ft_printf(COLOR_RED "There is an error! Please try again!"RESET);
+	{
+		ft_printf(COLOR_RED "Error calling sigaction! Please try again!"RESET);
+		exit (1);
+	}
 	if (sigaction(SIGUSR2, &sa_newsignal, NULL) == -1)
-		ft_printf(COLOR_RED "There is an error! Please try again!"RESET);
+	{
+		ft_printf(COLOR_RED "Error calling sigaction! Please try again!"RESET);
+		exit (1);
+	}
 }
 
 int	main(int argc, char **argv)

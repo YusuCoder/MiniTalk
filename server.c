@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 18:43:51 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/04/19 17:05:14 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/04/20 16:24:11 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	sighandler(int signal)
 	counter++;
 	if (counter == 8)
 	{
-		ft_printf(COLOR_MAGENTA ITALIC "%c", c);
+		ft_printf(COLOR_MAGENTA ITALIC "%c" RESET, c);
 		c = 0;
 		counter = 0;
 	}
@@ -37,8 +37,16 @@ int	main(void)
 	ft_printf(COLOR_CYAN BOLD UNDERLINE "%d\n" RESET, getpid());
 	s_action.sa_handler = sighandler;
 	s_action.sa_flags = SA_SIGINFO;
-	sigaction(SIGUSR1, &s_action, NULL);
-	sigaction(SIGUSR2, &s_action, NULL);
+	if (sigaction(SIGUSR1, &s_action, NULL) == -1)
+	{
+		ft_printf(COLOR_RED "Error calling sigaction\n"RESET);
+		exit(1);
+	}
+	if (sigaction(SIGUSR2, &s_action, NULL) == -1)
+	{
+		ft_printf(COLOR_RED "Error calling sigaction\n"RESET);
+		exit(1);
+	}
 	while (1)
 	{
 		pause();

@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 17:11:04 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/04/20 20:13:28 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/04/20 21:03:17 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define ITALIC "\x1b[3m"
 # define RESET "\x1b[0m"
 //LIBS
-# include "printf/ft_printf.h"
+# include "ft_printf/ft_printf.h"
 # include <signal.h>
 # include <stdlib.h>
 # include <unistd.h>

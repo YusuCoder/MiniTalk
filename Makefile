@@ -26,7 +26,7 @@ S_BONUS_OBJS = $(S_BONUS_SRCS:.c=.o)
 C_BONUS_SRCS = client_bonus.c bonus_utils.c
 C_BONUS_OBJS = $(C_BONUS_SRCS:.c=.o)
 
-PRINTF = ./printf/libftprintf.a
+PRINTF = ./ft_printf/libftprintf.a
 
 all: $(SERVER) $(CLIENT)
 	@echo "$(GREEN) $(SERVER) $(CLIENT)\n\n<---------------------------BUILT SUCCESSFULLY!--------------------------->\n"
@@ -35,7 +35,7 @@ bonus: $(SERVER_BONUS) $(CLIENT_BONUS)
 	@echo "$(GREEN) $(SERVER_BONUS) $(CLIENT_BONUS) \n\n<---------------------------BUILT SUCCESSFULLY!--------------------------->\n"
 
 $(PRINTF):
-	@make -C ./printf
+	@make -C ./ft_printf
 
 $(SERVER): $(S_OBJ) $(PRINTF)
 	@echo "$(GREEN)\n<---------------------------BUILDING MANDATORY OBJECTS--------------------------->\n"
@@ -59,7 +59,7 @@ $(CLIENT_BONUS): $(C_BONUS_OBJS) $(PRINTF)
 
 clean:
 	@echo "$(RED) \nCleaning ........................................................................................\n"
-	$(MAKE) clean -C ./printf
+	$(MAKE) clean -C ./ft_printf
 	$(RM) $(S_OBJ) $(C_OBJ) $(S_BONUS_OBJS) $(C_BONUS_OBJS) $(PRINTF)
 
 fclean: clean

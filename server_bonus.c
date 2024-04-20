@@ -6,7 +6,7 @@
 /*   By: ryusupov <ryusupov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 18:43:51 by ryusupov          #+#    #+#             */
-/*   Updated: 2024/04/20 16:15:08 by ryusupov         ###   ########.fr       */
+/*   Updated: 2024/04/20 20:51:34 by ryusupov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,12 @@ void	sighandler(int signal, siginfo_t *data, void *context)
 	if (counter == 8)
 	{
 		if (c != '\0')
-			ft_printf(COLOR_MAGENTA ITALIC "%c" RESET, c);
+		{
+			if (c >= 0 && c <= 127)
+				ft_printf(COLOR_MAGENTA ITALIC"%c"RESET, c);
+			else
+				ft_printf("%c", c);
+		}
 		else
 		{
 			kill(data->si_pid, SIGUSR1);
@@ -59,3 +64,6 @@ int	main(void)
 	}
 	return (0);
 }
+
+// test characters to print
+// 😀🤢🙄👻💀👽👾🤖🥳👫👩‍❤️‍👩👩‍❤️‍👨ئΨΨΨΨΨఔఔఔఔఔ⍇⌚⏩⑳⽷⻤⽋ぉネ
